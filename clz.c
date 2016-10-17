@@ -35,19 +35,32 @@ int byteShift(uint32_t x) {
     if ((x >> 28) == 0) { n += 4; x <<= 4; }
     if ((x >> 30) == 0) { n += 2; x <<= 2; }
     n = n - (x >> 31);
-       return n;
+    return n;
 }
 
+uint32_t count = 16;
+uint32_t mask  = 0xFFFFFFFF;
 int recursive(uint32_t x)
 {
-    
+    int result;
+        // shift upper half down, rest is filled up with 0s
+    uint16_t upper = (x >> count);
+        // mask upper half away
+    mask >>= count;
+    uint16_t lower = (x & mask);
 
+        // stopping condition
+    if(count == 1) {
+        return !(x >> 1);
+    }
 
-	/* shift upper half down, rest is filled up with 0s */
-	uint16_t upper = (x >> 16); 
-	// mask upper half away
-	uint16_t lower = (x & 0xFFFF);
-	return upper > 0 ? clz(upper) : 16 + clz(lower);
+        // shifting count and go into recursive
+    count >>= 1;
+    result = upper ? clz(upper) : (count << 1) + clz(lower);
+
+    return result;
+}
+
 }
 
 int harley(uint32_t x)
