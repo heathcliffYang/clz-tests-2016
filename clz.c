@@ -52,16 +52,12 @@ int recursive(uint32_t x)
 
 int harley(uint32_t x)
 {
-    static prog_uint8_t const Table[] = {
-      0xFF, 0, 0xFF, 15, 0xFF, 1, 28, 0xFF,
-      16, 0xFF, 0xFF, 0xFF, 2, 21, 29, 0xFF,
-      0xFF, 0xFF, 19, 17, 10, 0xFF, 12, 0xFF,
-      0xFF, 3, 0xFF, 6, 0xFF, 22, 30, 0xFF,
-      14, 0xFF, 27, 0xFF, 0xFF, 0xFF, 20, 0xFF,
-      18, 9, 11, 0xFF, 5, 0xFF, 0xFF, 13,
-      26, 0xFF, 0xFF, 8, 0xFF, 4, 0xFF, 25,
-      0xFF, 7, 24, 0xFF, 23, 0xFF, 31, 0xFF,
-    };
+
+   static char table[64] =
+     {32,20,19, u, u,18, u, 7,  10,17, u, u,14, u, 6, u,
+       u, 9, u,16, u, u, 1,26,   u,13, u, u,24, 5, u, u,
+       u,21, u, 8,11, u,15, u,   u, u, u, 2,27, 0,25, u,
+      22, u,12, u, u, 3,28, u,  23, u, 4,29, u, u,30,31};
 
     /* Propagate leftmost 1-bit to the right */
     x = x | (x >> 1);
@@ -76,5 +72,5 @@ int harley(uint32_t x)
     x = (x << 8) - x;   /* Again. */
     x = (x << 8) - x;   /* Again. */
 
-    return pgm_read_byte(&Table[x >> 26]);
+    return table[x >> 26];
 }
