@@ -1,5 +1,5 @@
 set xlabel 'Input value'
-set ylabel 'Time(sec)'
+set ylabel 'Time(nanosec)'
 set autoscale fix
 set style fill solid
 set datafile separator ","

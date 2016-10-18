@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -O0 -std=gnu99 -Wall
 EXECUTABLE = \
-	benchmark_clock_gettime
+	benchmark_time
 
 default: clz.o
 	$(CC) $(CFLAGS) clz.o benchmark_time.c -o benchmark_time
@@ -12,12 +12,12 @@ default: clz.o
 	$(CC) -c $(CFLAGS) $< -o $@
 
 gencsv: default
-	for i in `seq 0 1 100`; do\
+	for i in `seq 0 1 4294967295`; do\
 		printf "%d," $$i;\
-		./benchmark_clock_gettime $$i;\
+		./benchmark_time $$i;\
 	done > result_runtime.csv
 
-plot: result_time_compare.csv
+plot: result_runtime.csv
 	gnuplot runtime.gp
 
 clean:

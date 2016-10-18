@@ -15,7 +15,7 @@ int main(int argc, char const *argv[])
     if (argc < 2) return -1;
 
     int X = atoi(argv[1]);
-    int i, loop = 10,sum;
+    int i, loop = 1,sum;
     double avg;
     double time[loop];
 
@@ -24,7 +24,7 @@ int main(int argc, char const *argv[])
         clock_gettime(CLOCK_ID, &start);
         iteration(X);
         clock_gettime(CLOCK_ID, &end);
-        time[i]=(end.tv_sec - start.tv_sec) +(end.tv_nsec - start.tv_nsec)/ONE_SEC;
+        time[i]=(end.tv_sec - start.tv_sec)*ONE_SEC +(end.tv_nsec - start.tv_nsec);
         sum+=time[i];
     }
     avg=sum/loop;
@@ -37,7 +37,7 @@ int main(int argc, char const *argv[])
         clock_gettime(CLOCK_ID, &start);
         binarySearch(X);
         clock_gettime(CLOCK_ID, &end);
-        time[i]=(end.tv_sec - start.tv_sec) +(end.tv_nsec - start.tv_nsec)/ONE_SEC;
+        time[i]=(end.tv_sec - start.tv_sec)*ONE_SEC +(end.tv_nsec - start.tv_nsec);
         sum+=time[i];
     }
     avg=sum/loop;
@@ -51,7 +51,7 @@ int main(int argc, char const *argv[])
         clock_gettime(CLOCK_ID, &start);
         byteShift(X);
         clock_gettime(CLOCK_ID, &end);
-        time[i]=(end.tv_sec - start.tv_sec) +(end.tv_nsec - start.tv_nsec)/ONE_SEC;
+        time[i]=(end.tv_sec - start.tv_sec)*ONE_SEC +(end.tv_nsec - start.tv_nsec);
         sum+=time[i];
     }
     avg=sum/loop;
@@ -63,7 +63,7 @@ int main(int argc, char const *argv[])
         clock_gettime(CLOCK_ID, &start);
         recursive(X);
         clock_gettime(CLOCK_ID, &end);
-        time[i]=(end.tv_sec - start.tv_sec) +(end.tv_nsec - start.tv_nsec)/ONE_SEC;
+        time[i]=(end.tv_sec - start.tv_sec)*ONE_SEC +(end.tv_nsec - start.tv_nsec);
         sum+=time[i];
     }
     avg=sum/loop;
@@ -75,7 +75,7 @@ int main(int argc, char const *argv[])
         clock_gettime(CLOCK_ID, &start);
         harley(X);
         clock_gettime(CLOCK_ID, &end);
-        time[i]=(end.tv_sec - start.tv_sec) +(end.tv_nsec - start.tv_nsec)/ONE_SEC;
+        time[i]=(end.tv_sec - start.tv_sec)*ONE_SEC +(end.tv_nsec - start.tv_nsec);
         sum+=time[i];
     }
     avg=sum/loop;
