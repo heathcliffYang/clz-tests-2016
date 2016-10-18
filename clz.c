@@ -55,6 +55,7 @@ int recursive(uint32_t x)
         // shifting count and go into recursive
     count >>= 1;
     result = upper ? recursive(upper) : (count << 1) + recursive(x);
+    count <<= 1;
 
     return result;
 }
