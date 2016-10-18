@@ -2,7 +2,8 @@
 #include <omp.h>
 #include <stdint.h>
 #include "clz.h"
- 
+#define u 99 
+
 int iteration(uint32_t x) {
     int n = 32, c = 16;
     uint32_t y = 0;
@@ -63,11 +64,11 @@ int recursive(uint32_t x)
 int harley(uint32_t x)
 {
 
-   static char table[64] =
-     {32,20,19, u, u,18, u, 7,  10,17, u, u,14, u, 6, u,
-       u, 9, u,16, u, u, 1,26,   u,13, u, u,24, 5, u, u,
-       u,21, u, 8,11, u,15, u,   u, u, u, 2,27, 0,25, u,
-      22, u,12, u, u, 3,28, u,  23, u, 4,29, u, u,30,31};
+    static int table[64] =
+     {32,31, u,16, u,30, 3, u,  15, u, u, u,29, 10, 2, u,
+       u, u, 12,14, 21, u, 19,u,   u,28, u, 25,u, 9, 1, u,
+       17,u, 4, u,u, u,11, u,   13, 22, 20, u,26, u,u, 18,
+      5, u,u, 23, u, 27,u, 6,  u, 24, 7,u, 8, u,0,u};
 
     /* Propagate leftmost 1-bit to the right */
     x = x | (x >> 1);

@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "clz.h"
 #include <math.h>
+#include "clz.h"
 
 #define CLOCK_ID CLOCK_MONOTONIC_RAW
 #define ONE_SEC 1000000000.0
@@ -18,69 +18,69 @@ int main(int argc, char const *argv[])
     int i, loop = 10,sum;
     double avg;
     double time[loop];
-    // recursive version
-    for(i = 0; i < loop; i++) {
-        clock_gettime(CLOCK_ID, &start);
-        clz_recur(X);
-        clock_gettime(CLOCK_ID, &end);
-        time[i]=(end.tv_sec - start.tv_sec) +(end.tv_nsec - start.tv_nsec)/ONE_SEC;
-        sum+=time[i];
-    }
-    avg=sum/loop;
-    printf("%lf,", (double) avg);
-    printf("%lf,", (double) time);
-
 
     // iteration version
     for(i = 0; i < loop; i++) {
         clock_gettime(CLOCK_ID, &start);
-        clz_iter(X);
+        iteration(X);
         clock_gettime(CLOCK_ID, &end);
         time[i]=(end.tv_sec - start.tv_sec) +(end.tv_nsec - start.tv_nsec)/ONE_SEC;
         sum+=time[i];
     }
     avg=sum/loop;
     printf("%lf,", (double) avg);
-    printf("%lf,", (double) time);
+//    printf("%lf,", (double) time);
 
 
-    // binary search technique
+    // binarySearch version
+    for(i = 0; i < loop; i++) {
+        clock_gettime(CLOCK_ID, &start);
+        binarySearch(X);
+        clock_gettime(CLOCK_ID, &end);
+        time[i]=(end.tv_sec - start.tv_sec) +(end.tv_nsec - start.tv_nsec)/ONE_SEC;
+        sum+=time[i];
+    }
+    avg=sum/loop;
+    printf("%lf,", (double) avg);
+//    printf("%lf,", (double) time);
+
+
+    // byteShift version
     
     for(i = 0; i < loop; i++) {
         clock_gettime(CLOCK_ID, &start);
-        clz_bi_search(X);
+        byteShift(X);
         clock_gettime(CLOCK_ID, &end);
         time[i]=(end.tv_sec - start.tv_sec) +(end.tv_nsec - start.tv_nsec)/ONE_SEC;
         sum+=time[i];
     }
     avg=sum/loop;
     printf("%lf,", (double) avg);
-    printf("%lf,", (double) time);
+//    printf("%lf,", (double) time);
 
-    // byte-shift version
+    // recursive version
     for(i = 0; i < loop; i++) {
         clock_gettime(CLOCK_ID, &start);
-        clz_byte_shift(X);
+        recursive(X);
         clock_gettime(CLOCK_ID, &end);
         time[i]=(end.tv_sec - start.tv_sec) +(end.tv_nsec - start.tv_nsec)/ONE_SEC;
         sum+=time[i];
     }
     avg=sum/loop;
     printf("%lf,", (double) avg);
-    printf("%lf,", (double) time);
+//    printf("%lf,", (double) time);
 
-    // Harley's algorithm
-    
+    // Harley's algorithm version
     for(i = 0; i < loop; i++) {
         clock_gettime(CLOCK_ID, &start);
-        clz_harley_alg(X);
+        harley(X);
         clock_gettime(CLOCK_ID, &end);
         time[i]=(end.tv_sec - start.tv_sec) +(end.tv_nsec - start.tv_nsec)/ONE_SEC;
         sum+=time[i];
     }
     avg=sum/loop;
-    printf("%lf,", (double) avg);
-    printf("%lf,", (double) time);
+    printf("%lf\n", (double) avg);
+//    printf("%lf,", (double) time);
 
 
     return 0;

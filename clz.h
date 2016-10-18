@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdint.h>
 
 int iteration(uint32_t x);
 int binarySearch(uint32_t x);
