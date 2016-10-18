@@ -45,6 +45,8 @@ int recursive(uint32_t x)
         // shift upper half down, rest is filled up with 0s
     uint16_t upper = (x >> count);
 
+    if(x==0) return 32;
+
         // stopping condition
     if(count == 1) {
         return !(x >> 1);
