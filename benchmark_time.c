@@ -7,29 +7,24 @@
 #define CLOCK_ID CLOCK_MONOTONIC_RAW
 #define ONE_SEC 1000000000.0
 
-int main(int argc, char const *argv[])
+int main(void)
 {
     struct timespec start = {0, 0};
     struct timespec end = {0, 0};
 
-    if (argc < 2) return -1;
+    uint32_t X = 0;
+    unsigned int time[loop];
 
-    int X = atoi(argv[1]);
-    int i, loop = 1,sum;
-    double avg;
-    double time[loop];
+    for(; X < 4294967295; X++) {
+
+    printf("%d,", X);
 
     // iteration version
-    for(i = 0; i < loop; i++) {
         clock_gettime(CLOCK_ID, &start);
         iteration(X);
         clock_gettime(CLOCK_ID, &end);
-        time[i]=(end.tv_sec - start.tv_sec)*ONE_SEC +(end.tv_nsec - start.tv_nsec);
-        sum+=time[i];
-    }
-    avg=sum/loop;
-    printf("%lf,", (double) avg);
-//    printf("%lf,", (double) time);
+        time=(end.tv_sec - start.tv_sec)*ONE_SEC +(end.tv_nsec - start.tv_nsec);
+    printf("%lf,", time);
 
 
     // binarySearch version
@@ -41,8 +36,7 @@ int main(int argc, char const *argv[])
         sum+=time[i];
     }
     avg=sum/loop;
-    printf("%lf,", (double) avg);
-//    printf("%lf,", (double) time);
+    printf("%lf,", avg);
 
 
     // byteShift version
@@ -55,8 +49,7 @@ int main(int argc, char const *argv[])
         sum+=time[i];
     }
     avg=sum/loop;
-    printf("%lf,", (double) avg);
-//    printf("%lf,", (double) time);
+    printf("%lf,", avg);
 
     // recursive version
     for(i = 0; i < loop; i++) {
@@ -67,8 +60,7 @@ int main(int argc, char const *argv[])
         sum+=time[i];
     }
     avg=sum/loop;
-    printf("%lf,", (double) avg);
-//    printf("%lf,", (double) time);
+    printf("%lf,", avg);
 
     // Harley's algorithm version
     for(i = 0; i < loop; i++) {
@@ -79,9 +71,9 @@ int main(int argc, char const *argv[])
         sum+=time[i];
     }
     avg=sum/loop;
-    printf("%lf\n", (double) avg);
-//    printf("%lf,", (double) time);
+    printf("%lf\n", avg);
 
+    }
 
     return 0;
 }

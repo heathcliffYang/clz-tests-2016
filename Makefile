@@ -12,10 +12,7 @@ default: clz.o
 	$(CC) -c $(CFLAGS) $< -o $@
 
 gencsv: default
-	for i in `seq 0 1 4294967295`; do\
-		printf "%d," $$i;\
-		./benchmark_time $$i;\
-	done > result_runtime.csv
+	./benchmark_time > result_runtime.csv
 
 plot: result_runtime.csv
 	gnuplot runtime.gp
