@@ -20,11 +20,15 @@ default: clz.o
 	$(CC) -c $(CFLAGS) $< -o $@
 
 gencsv: default
-	./benchmark_time_1 > result_runtime_1.csv
-	./benchmark_time_2 > result_runtime_2.csv
-	./benchmark_time_3 > result_runtime_3.csv
-	./benchmark_time_4 > result_runtime_4.csv
-	./benchmark_time_5 > result_runtime_5.csv
+	j = 0;
+	for i in `seq 0 10 100`;do \
+		j++;\
+		./benchmark_time_1 $$i > result_time_iter_$$j.csv;\
+	done
+#for i in `seq 0 67108864 4294967296`;\
+#	./benchmark_time_3 > result_runtime_3.csv
+#	./benchmark_time_4 > result_runtime_4.csv
+#	./benchmark_time_5 > result_runtime_5.csv
 
 plot: $(RESULT)
 	gnuplot runtime.gp
