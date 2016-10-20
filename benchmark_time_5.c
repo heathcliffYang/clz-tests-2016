@@ -15,13 +15,14 @@ int main(void)
     uint32_t X = 0;
     unsigned int time;
        
-    for( X ;X<4294967295;X++)
+    for( ;X<4294967295;X++)
     {
+    printf("%u,",X);
     clock_gettime(CLOCK_ID, &start);
     harley(X);
     clock_gettime(CLOCK_ID, &end);
     time=(end.tv_sec - start.tv_sec)*ONE_SEC +(end.tv_nsec - start.tv_nsec);
-    printf("%lf,", (double) time);
+    printf("%u\n",time);
     }
     return 0;
 }

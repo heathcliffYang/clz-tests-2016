@@ -16,7 +16,7 @@ int main(void)
     uint32_t X = 0;
     unsigned int time;
        
-    for( X ;X<4294967295;X++)
+    for( ;X<4294967295;X++)
     {
     clock_gettime(CLOCK_ID, &start);
     result=iteration(X);
