@@ -12,8 +12,9 @@ int main(int argc, char const *argv[])
 {
     struct timespec start = {0, 0};
     struct timespec end = {0, 0};
-    uint32_t X = 0;
-    uint32_t loop = atoi(argv[1]);
+
+    uint32_t X = atoi(argv[1]);
+    uint32_t loop = X + 67108864;
     unsigned int time;
        
     for( ;X < loop; X++)

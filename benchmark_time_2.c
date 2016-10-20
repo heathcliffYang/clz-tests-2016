@@ -6,16 +6,18 @@
 
 #define CLOCK_ID CLOCK_MONOTONIC_RAW
 #define ONE_SEC 1000000000.0
+
 // binarySearch version
-int main(void)
+int main(int argc, char const *argv[])
 {
     struct timespec start = {0, 0};
     struct timespec end = {0, 0};
 
-    uint32_t X = 0;
+    uint32_t X = atoi(argv[1]);
+    uint32_t loop = X + 67108864;
     unsigned int time;
        
-    for( ;X<4294967295;X++)
+    for( ; X < loop; X++)
     {
     printf("%u,", X);
     clock_gettime(CLOCK_ID, &start);
