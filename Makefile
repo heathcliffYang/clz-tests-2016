@@ -18,11 +18,20 @@ default: clz.o
 
 gencsv: default
 	for i in `seq 0 67108864 4227858432`; do\
-		./benchmark_time_1 $$i > result_runtime_iter_"$$i".csv;\
+		./benchmark_time_3 $$i > result_runtime_byte_"$$i".csv;\
 	done
 
 plot: result_runtime.csv
 	gnuplot runtime.gp
+
+plot_single: default
+	gnuplot single_runtime.gp
+
+write_gp: default
+	printf "plot 'result_runtime_iter_0.csv' using 1:2 title 'iteration' with linespoints,";\
+	for i in `seq 67108864 67108864 4227858432`; do\
+		printf "'result_runtime_iter_%u.csv' using 1:2 title 'iteration' with linespoints," $$i;\
+	done > single_runtime.gp
 
 perf_iter:default
 	perf stat -e cache-misses,cpu-cycles,instructions,branch-misses ./benchmak_time_1
