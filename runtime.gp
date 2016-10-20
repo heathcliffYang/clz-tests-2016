@@ -12,4 +12,3 @@ plot 'result_runtime.csv' using 1:2 title 'iteration' with linespoints, \
      'result_runtime.csv' using 1:4 title 'byteShift' with linespoints, \
      'result_runtime.csv' using 1:5 title 'recursive' with linespoints, \
      'result_runtime.csv' using 1:6 title 'harley' with linespoints, \
-
