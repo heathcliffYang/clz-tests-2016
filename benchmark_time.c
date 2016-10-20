@@ -13,11 +13,11 @@ int main(void)
     struct timespec end = {0, 0};
 
     unsigned int time;
-    uint32_t X = 0;
+    uint32_t X = 1;
 
-    for(; X < 4294967295; X++) {
+    for(; X < 4294967295 && X!=0; X<<=1) {
 
-    printf("%d,", X);
+    printf("%u,", X);
 
     
     // iteration version
@@ -55,7 +55,7 @@ int main(void)
     harley(X);
     clock_gettime(CLOCK_ID, &end);
     time=(end.tv_sec - start.tv_sec)*ONE_SEC +(end.tv_nsec - start.tv_nsec);
-    printf("%u,",  time);
+    printf("%u\n",  time);
 }
     return 0;
 }

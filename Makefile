@@ -1,13 +1,10 @@
 CC = gcc
 CFLAGS = -O0 -std=gnu99 -Wall
 EXECUTABLE = \
-	benchmark_time_1 benchmark_time_2 benchmark_time_3 \
-	benchmark_time_4 benchmark_time_5
-RESULT = \
-	result_runtime_1.csv result_runtime_2.csv result_runtime_3.csv \
-	result_runtime_4.csv result_runtime_5.csv
+	benchmark_time_1 benchmark_time_2 benchmark_time_3 benchmark_time_4 benchmark_time_5
 
 default: clz.o
+	$(CC) $(CFLAGS) clz.o benchmark_time.c -o benchmark_time
 	$(CC) $(CFLAGS) clz.o benchmark_time_1.c -o benchmark_time_1
 	$(CC) $(CFLAGS) clz.o benchmark_time_2.c -o benchmark_time_2
 	$(CC) $(CFLAGS) clz.o benchmark_time_3.c -o benchmark_time_3
@@ -20,25 +17,32 @@ default: clz.o
 	$(CC) -c $(CFLAGS) $< -o $@
 
 gencsv: default
-	./benchmark_time_5 > result_runtime_5.csv
+	for i in `seq 0 67108864 4227858432`; do\
+		./benchmark_time_2 $$i > result_runtime_bin_"$$i".csv;\
+	done
 
-plot: $(RESULT)
+compare: default
+	./benchmark_time > result_runtime.csv
+
+plot: result_runtime.csv
 	gnuplot runtime.gp
 
 perf_iter:default
-	perf stat -e cache-misses,cpu-cycles,instructions,branch-misses ./perf_iter
+	perf stat -e cache-misses,cpu-cycles,instructions,branch-misses ./benchmark_time_1
 
 perf_bin:default
-	perf stat -e cache-misses,cpu-cycles,instructions,branch-misses ./perf_bin
+	perf stat -e cache-misses,cpu-cycles,instructions,branch-misses ./benchmark_time_2
 
 perf_byte:default
-	perf stat -e cache-misses,cpu-cycles,instructions,branch-misses ./perf_byte
+	perf stat -e cache-misses,cpu-cycles,instructions,branch-misses ./benchmark_time_3
 
 perf_recur:default
-	perf stat -e cache-misses,cpu-cycles,instructions,branch-misses ./perf_recur
+	perf stat -e cache-misses,cpu-cycles,instructions,branch-misses ./benchmark_time_4
 
 perf_harley:default
-	perf stat -e cache-misses,cpu-cycles,instructions,branch-misses ./perf_harley
+	perf stat -e cache-misses,cpu-cycles,instructions,branch-misses ./benchmark_time_5
+
+
 
 clean:
-	rm -f $(EXECUTABLE) *.o *.s $(RESULT)
+	rm -f $(EXECUTABLE) *.o *.s *.csv
