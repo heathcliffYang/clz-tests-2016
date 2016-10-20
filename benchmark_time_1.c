@@ -12,17 +12,16 @@ int main(void)
 {
     struct timespec start = {0, 0};
     struct timespec end = {0, 0};
-    int result;
     uint32_t X = 0;
     unsigned int time;
        
     for( ;X<4294967295;X++)
     {
     clock_gettime(CLOCK_ID, &start);
-    result=iteration(X);
+    iteration(X);
     clock_gettime(CLOCK_ID, &end);
     time=(end.tv_sec - start.tv_sec)*ONE_SEC +(end.tv_nsec - start.tv_nsec);
-    printf("%lf=%d,", (double) time,(int)result);
+    printf("%lf=%d,",  time);
     }
     return 0;
 }
