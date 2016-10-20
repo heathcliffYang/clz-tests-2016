@@ -21,7 +21,7 @@ int main(void)
     iteration(X);
     clock_gettime(CLOCK_ID, &end);
     time=(end.tv_sec - start.tv_sec)*ONE_SEC +(end.tv_nsec - start.tv_nsec);
-    printf("%lf=%d,",  time);
+    printf("%u,",  time);
     }
     return 0;
 }

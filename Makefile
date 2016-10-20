@@ -20,10 +20,6 @@ default: clz.o
 	$(CC) -c $(CFLAGS) $< -o $@
 
 gencsv: default
-	./benchmark_time_1 > result_runtime_1.csv
-	./benchmark_time_2 > result_runtime_2.csv
-	./benchmark_time_3 > result_runtime_3.csv
-	./benchmark_time_4 > result_runtime_4.csv
 	./benchmark_time_5 > result_runtime_5.csv
 
 plot: $(RESULT)
